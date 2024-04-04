@@ -4,8 +4,8 @@ const pipe = document.querySelector('.pipe');
 const start = document.querySelector('.start');
 const gameOver = document.querySelector('.game-over');
 
-audioStart = new Audio('../src/soung/audio_theme.mp3');
-audioGameOver = new Audio('../src/soung/audio_gameover.mp3');
+audioStart = new Audio('../soung/audio_theme.mp3');
+audioGameOver = new Audio('../soung/audio_gameover.mp3');
 
 const startGame = () => {
     pipe.classList.add('pipe-animation');
@@ -19,7 +19,7 @@ const restartGame = () => {
     gameOver.style.display = 'none';
     pipe.style.left = '';
     pipe.style.right = '0';
-    mario.src = '../src/image/mario.gif';
+    mario.src = '../image/mario.gif';
     mario.style.width = '150px';
     mario.style.bottom = '0';
 
@@ -40,6 +40,14 @@ const jump = () => {
     }, 800);
 };
 
+function stopAudioStart() {
+    audioStart.pause();
+}
+
+function stopAudio() {
+    audioGameOver.pause();
+}
+
 const loop = () => {
     setInterval(() => {
         const pipePosition = pipe.offsetLeft;
@@ -52,20 +60,16 @@ const loop = () => {
             mario.classList.remove('.jump');
             mario.style.bottom = `${marioPosition}px`;
 
-            mario.src = '../src/image/game-over.png';
+            mario.src = '../image/game-over.png';
             mario.style.width = '80px';
             mario.style.marginLeft = '50px';
 
-            function stopAudioStart() {
-                audioStart.pause()
-            }
+            
             stopAudioStart();
               
             audioGameOver.play();
               
-            function stopAudio() {
-                audioGameOver.pause()
-            }
+            
             setTimeout(stopAudio, 7000);
               
             gameOver.style.display = 'flex';
